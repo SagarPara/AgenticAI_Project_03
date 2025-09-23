@@ -25,7 +25,7 @@ from dotenv import load_dotenv
 load_dotenv(override=True)
 
 
-os.environ["OPENAI_API_KEY"] == os.getenv("OPENAI_API_KEY")
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
