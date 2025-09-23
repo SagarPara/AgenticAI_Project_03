@@ -1,0 +1,8 @@
+[theme]
+base="dark"  # Optional: you can remove or adjust theme settings
+
+[server]
+headless = true
+
+[client]
+showSidebarNavigation = false  # Hide the default page selector
