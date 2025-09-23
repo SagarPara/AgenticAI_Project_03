@@ -1,0 +1,27 @@
+# Ignore Python virtual environment
+.venv
+env
+venv
+
+# Ignore caches
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+
+# Ignore git
+.git
+.gitignore
+
+# Ignore datasets / large media files
+*.csv
+*.zip
+*.tar
+*.db
+
+# Ignore environment files with secrets
+.env

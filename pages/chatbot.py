@@ -32,11 +32,9 @@ from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 
-pdf_files_1 = [r"C:\Users\Dell\OneDrive\Documents\Sagar_Parab_Resume.pdf"]
-             
 
+pdf_files_1 = ["data/Sagar_Parab_Resume.pdf"]
 docs_1 = [PyPDFLoader(doc).load() for doc in pdf_files_1]
-print(docs_1)
 
 docs_list_1 = [item for sublist in docs_1 for item in sublist]
 
@@ -58,10 +56,8 @@ retriever_resume_tool_1 = create_retriever_tool(
     "search and find the information about Sagar resume"
 )
 
-pdf_files_2 = [r"C:\Users\Dell\OneDrive\Documents\BERT summary.pdf"]
-
+pdf_files_2 = ["data/BERT summary.pdf"]
 docs_2 = [PyPDFLoader(doc).load() for doc in pdf_files_2]
-print(docs_2)
 
 docs_list_2 = [item for sublist in docs_2 for item in sublist]
 

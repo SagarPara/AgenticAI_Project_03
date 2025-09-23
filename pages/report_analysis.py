@@ -140,7 +140,7 @@ def app():
 
 
 
-    st.title("GPT-Powered CSV analyzwer Report")
+    st.title("GPT-Powered CSV analyser Report")
 
     uploaded_file = st.file_uploader("Upload a csv file: ", type=["csv"])
 
