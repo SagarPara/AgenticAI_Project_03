@@ -71,35 +71,47 @@ def report_analysis(df: pd.DataFrame):
 
 
 
+"""
+This function takes a string (response_text) as input.
+The goal is to find Python code blocks in the text, run them, and collect any plots (figures) that the code generates.
+"""
+
 def extract_and_plot_code_blocks(response_text):
     import re
 
     code_blocks = re.findall(r"```python(.*?)```", response_text, re.DOTALL)
     figs = []
 
-    for code in code_blocks:
-        local_vars = {}
+    """
+    It uses a regular expression (re.findall) to search for text between:
+    re.DOTALL makes sure that even multi-line code blocks are captured.
+    Result:
+    code_blocks will be a list of code snippets.
+    """
+
+    for code in code_blocks:    # It goes through each code snippet found.
+        local_vars = {}         # local_vars is a dictionary to store any variables created when running the code.
 
         # clean indentation
-        cleaned_code = textwrap.dedent(code).strip()
+        cleaned_code = textwrap.dedent(code).strip()  # Removes any extra indentation and unnecessary spaces.
 
         code_to_exec = f""" 
-df = st.session_state.df.copy()
+df = st.session_state.df.copy()     # Before running the user's code, it automatically creates a copy of a dataframe (df) stored in st.session_state.df.
         
 
 {cleaned_code} 
 """
 
         try:
-            exec(code_to_exec, {'plt': plt, 'sns': sns, 'pd': pd, 'st': st}, local_vars)
+            exec(code_to_exec, {'plt': plt, 'sns': sns, 'pd': pd, 'st': st}, local_vars)    # exec() runs the code dynamically like Python would run it in a script.
 
             # captures all open figures
-            for fig_num in plt.get_fignums():
+            for fig_num in plt.get_fignums():   # After the code runs, this finds all the active Matplotlib figures that were created.
                 fig = plt.figure(fig_num)
                 figs.append(fig)
 
             # close all figures so they dont overlap
-            plt.close(fig)
+            plt.close(fig)      # After capturing a figure, it closes it, so it doesn’t overlap with the next plot.
 
                 #fig = plt.gcf()
             #figs.append(fig)
