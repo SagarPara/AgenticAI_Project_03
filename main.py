@@ -1,19 +1,16 @@
 ### main.py
 import os
-from dotenv import load_dotenv
 
-# Load environment variables from .env
-load_dotenv()
 
-# Now safely set environment variables (with check)
-required_keys = ["OPENAI_API_KEY", "GROQ_API_KEY", "TAVILY_API_KEY"]
+# Environment variables already provided by Docker
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 
-for key in required_keys:
-    value = os.getenv(key)
-    if not value:
-        raise ValueError(f"{key} is not set in the environment!")
-    os.environ[key] = value
-    
+# Validate required variables
+if not OPENAI_API_KEY:
+    raise ValueError("OPENAI_API_KEY missing. Make sure you passed --env-file .env when running Docker.")
+
 
 
 import streamlit as st

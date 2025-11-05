@@ -27,10 +27,10 @@ load_dotenv(override=True)
 
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
-from langchain_core.prompts import ChatPromptTemplate
+# from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0)
 
 
 pdf_files_1 = ["data/Sagar_Parab_Resume.pdf"]
@@ -147,10 +147,10 @@ def llm_agent(state: State):
     print("---CALL AGENT---")
     messages = state["messages"]
     llm_with_tools = llm.bind_tools(tools)
-    respose = llm_with_tools.invoke(messages)
+    response = llm_with_tools.invoke(messages)
 
     # we will return a list, because this will get added to the existing list
-    return {"messages": [respose]}
+    return {"messages": [response]}
 
 
 graph_builder = StateGraph(State)
@@ -169,7 +169,7 @@ memory = MemorySaver()
 graph = graph_builder.compile(checkpointer=memory)
 
 ### Display
-from IPython.display import Image, display
+# from IPython.display import Image, display
 
 # graph_image = graph.get_graph().draw_mermaid_png()
 # display(Image(graph_image))

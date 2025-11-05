@@ -4,8 +4,15 @@ FROM python:3.12.9-slim-bullseye
 # Set working directory
 WORKDIR /app
 
+
+# Install dotenv support (usually already installed)
+RUN pip install python-dotenv
+
+
+
 # Copy only requirements first (for caching)
 COPY requirements.txt .
+
 
 # Install dependencies
 RUN pip install --upgrade pip \
